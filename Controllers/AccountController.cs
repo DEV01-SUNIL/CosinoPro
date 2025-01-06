@@ -26,28 +26,43 @@ namespace CasinoPro.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] Register model)
+        public async Task<ResJsonOutput> Register([FromBody] Register model)
         {
+            ResJsonOutput resJsonOutput = new ResJsonOutput();
             var user = new IdentityUser { UserName = model.Username, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
                 //await _userManager.AddToRoleAsync(user, "User");
-                return Ok(new { message = "User registered successfully" });
+                resJsonOutput.Status.IsSuccess=true;
+                resJsonOutput.Status.StatusCode = "SUCCESS";
+                resJsonOutput.Status.Message = "User registered susseccfully"; 
+                
             }
-
-            return BadRequest(result.Errors);
+            else
+            {
+                resJsonOutput.Status.IsSuccess = false;
+                resJsonOutput.Status.StatusCode = "FAILIER";
+                resJsonOutput.Status.Message = "User not registered!";
+            }
+            return resJsonOutput;
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] Login model)
+        public async Task<ResJsonOutput> Login([FromBody] Login model)
         {
-            var user = await _userManager.FindByNameAsync(model.Username);
+            ResJsonOutput resJsonOutput = new ResJsonOutput();
+            AppUserLoginData appUserLoginData = new AppUserLoginData();
+            VMRegister vMRegister = new VMRegister();
+            TokenData tokenData=new TokenData();    
+           var user = await _userManager.FindByNameAsync(model.Username);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 
+                vMRegister.Username = model.Username;
+                vMRegister.Password = model.Password;
                 var authClaims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
@@ -62,11 +77,26 @@ namespace CasinoPro.Controllers
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!)),
                     SecurityAlgorithms.HmacSha256));
+                tokenData.Token = new JwtSecurityTokenHandler().WriteToken(token).ToString();
+                tokenData.Expiry= long.Parse(_configuration["Jwt:ExpiryMinutes"]!);
+                appUserLoginData.AuthToken= tokenData;  
+                appUserLoginData.cmsuser = vMRegister;
+                resJsonOutput.Data = appUserLoginData;
+                resJsonOutput.Status.IsSuccess = true;
+                resJsonOutput.Status.StatusCode = "SUCCESS";
+                resJsonOutput.Status.Message = "User Login susseccfully";
+               
+               
 
-                return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+            }
+            else
+            {
+                resJsonOutput.Status.IsSuccess = false;
+                resJsonOutput.Status.StatusCode = "FAILIER";
+                resJsonOutput.Status.Message = "User not registered!";
             }
 
-            return Unauthorized();
+            return resJsonOutput;
         }
 
         [HttpPost("add-role")]
@@ -104,6 +134,16 @@ namespace CasinoPro.Controllers
             return BadRequest(result.Errors);
         }
 
-      
+        [HttpGet("protected-data")]
+        [Authorize]
+        public IActionResult GetProtectedData()
+        {
+            var userName = User.Identity.Name;  // Access the username from the JWT
+            return Ok(new
+            {
+                Message = "Access granted",
+                UserName = userName
+            });
+        }
     }
 }
