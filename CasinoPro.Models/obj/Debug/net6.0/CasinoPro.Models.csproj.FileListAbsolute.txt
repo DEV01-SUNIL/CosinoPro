@@ -1,0 +1,12 @@
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\bin\Debug\net6.0\CasinoPro.Models.deps.json
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\bin\Debug\net6.0\CasinoPro.Models.dll
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\bin\Debug\net6.0\CasinoPro.Models.pdb
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\obj\Debug\net6.0\CasinoPro.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\obj\Debug\net6.0\CasinoPro.Models.AssemblyInfoInputs.cache
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\obj\Debug\net6.0\CasinoPro.Models.AssemblyInfo.cs
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\obj\Debug\net6.0\CasinoPro.Models.csproj.CoreCompileInputs.cache
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\obj\Debug\net6.0\CasinoPro.Models.dll
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\obj\Debug\net6.0\refint\CasinoPro.Models.dll
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\obj\Debug\net6.0\CasinoPro.Models.pdb
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\obj\Debug\net6.0\ref\CasinoPro.Models.dll
+C:\Users\Sunil.Kushwaha.WINJITBIOS\source\repos\CasinoPro.Models\obj\Debug\net6.0\CasinoPro.Models.csproj.AssemblyReference.cache

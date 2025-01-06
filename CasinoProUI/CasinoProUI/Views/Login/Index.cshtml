@@ -1,0 +1,31 @@
+﻿ @model CasinoPro.Models.VMLogin
+
+@using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @autocomplete = "off" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group has-feedback">
+
+        @Html.TextBoxFor(u => u.Username, new { @class = "form-control", @placeholder = "User Name", @autocomplete = "off", oncopy = "return false", onpaste = "return false" })
+        <p>
+            @Html.ValidationMessageFor(u => u.Username)
+        </p>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+    </div>
+    <div class="form-group has-feedback">
+
+        @Html.PasswordFor(u => u.Password, new { @class = "form-control", @placeholder = "Password", @autocomplete = "off", oncopy = "return false", onpaste = "return false" })
+        <p>
+            @Html.ValidationMessageFor(u => u.Password)
+        </p>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+        <!-- /.col -->
+    </div>
+}
